@@ -1,4 +1,5 @@
 CC = clang
+CXX = clang++
 AS = nasm
 LD = ld.lld
 
