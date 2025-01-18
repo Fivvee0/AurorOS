@@ -80,7 +80,7 @@ void read_str(char *buffer, uint16_t max_length, uint8_t secret, uint8_t color) 
             continue;
         }
 
-        char c;
+        char c = '\0';
         switch (key) {
             case 0x2A:
             case 0x36:

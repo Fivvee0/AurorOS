@@ -2,7 +2,7 @@ CC = clang
 AS = nasm
 LD = ld.lld
 
-CFLAGS = --target=i686-elf -Wall -Wextra -m32 -ffreestanding -nostartfiles -Iinclude -nostdlib -fno-stack-protector -c
+CFLAGS = --target=i686-elf -Wall -Wextra -m32 -ffreestanding -Iinclude -nostdlib -fno-stack-protector -c
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T link.ld
 
@@ -47,7 +47,7 @@ bin/%.o: apps/tinypad/%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM) kernel.elf
+	rm -rf bin kernel.elf
 
 run:
 	qemu-system-x86_64 -kernel kernel.elf

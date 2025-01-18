@@ -8,7 +8,9 @@
  * -------------------------------------------------------------------------
  */
 
-extern int terminal_main();
+#include <types.h>
+
+extern int terminal_main(uint16_t theme);
 extern void kernelpanic(const char *errcode);
 
 void main() {

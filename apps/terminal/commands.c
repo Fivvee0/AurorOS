@@ -8,8 +8,6 @@
  * -------------------------------------------------------------------------
  */
 
-#pragma GCC optimize ("O3")
-
 #include <types.h>
 #include <msg.h>
 #include <string.h>
