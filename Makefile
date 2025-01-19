@@ -19,7 +19,7 @@ bin:
 
 kernel.elf: $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM)
 	$(LD) $(LDFLAGS) -o $@ $^
-	strip $@
+	strip --strip-all $@
 
 $(KERNEL_OBJECTS_ASM): $(KERNEL_SOURCES_ASM)
 	$(AS) $(ASFLAGS) -o $@ $^
