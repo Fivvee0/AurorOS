@@ -7,6 +7,7 @@
 #include <panic.h>
 #include <screen.h>
 #include <hardware/cpu.h>
+#include <hardware/qemu.h>
 
 #include "commands.h"
 
@@ -19,33 +20,12 @@ void printprefix(const char* user, const char* pcname) {
     print(" $ ", 0x0F);
 }
 
-int terminal_main(uint16_t theme) {
+int terminal_main() {
     clearscreen();
 
-    println("", 0x07);
-    println("                        @@@@@@@@@                           ", theme);                                                            
-    println("                       @@@@@@@@@@@@@@                       ", theme);                                                                 
-    println("                       @@@@@@@@@@@@@@@@                     ", theme);                                 
-    println("                       @@@@@@@@@@@@@@@@                     ", theme);
-    println("                    @@@@@@@@@@@@@@@@@@@     @@@@@           ", theme);
-    println("                    @@@@@@@@@@@@@@@@@@     @@@@@@@@         ", theme);
-    println("                    @@@@@@@@@@@@@@@@      @@@@@@@@@@        ", theme);
-    println("                    @@@@@@@@@@@@@@@@     @@@@@@@@@@@        ", theme);
-    println("                    @@@@@@@@@@@@@@@@    @@@@@   @@@@@       ", theme);
-    println("               @@@@@@@@@@@@@@@@@@@@    @@@@@@   @@@@@@      ", theme);
-    println("               @@@@@@@@@@@@@@@@@@     @@@@@@     @@@@@@     ", theme);
-    println("                @@@@@@@@@@@@@@@@     @@@@@@       @@@@@     ", theme);
-    println("                 @@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@    ", theme);
-    println("                  @@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@@@@   ", theme);
-    println("                      @@@@@       @@@@@@@@@@@@@@@@@@@@@@@@  ", theme);
-    println("                                 @@@@@@             @@@@@@  ", theme);
-    println("                                 @@@@@@             @@@@@@  ", theme);
-    println("                                  @@@@               @@@@   ", theme);
-    println("", 0x07);
+    print_info(NAME);
 
-    print_info(AUROR_NAME);
-
-    char user[4];
+    char user[8];
     strcpy(user, "root");
 
     char buffer[128];
@@ -65,9 +45,9 @@ int terminal_main(uint16_t theme) {
 
             if (streql(args[0], "ver")) {
                 print(" ", 0x07);
-                print(AUROR_NAME, 0x07);
+                print(NAME, 0x07);
                 print(" ", 0x07);
-                println(AUROR_VERSION, 0x07);
+                println(VERSION, 0x07);
             } else if (streql(args[0], "print")) {
                 println(farg ,0x07);
             } else if (streql(args[0], "cowsay")) {
@@ -92,13 +72,17 @@ int terminal_main(uint16_t theme) {
                 tinypad_main(0x07, 0x9F);
             } else if (streql(args[0], "debug_panic")) {
                 kernelpanic("DEBUG_KERNEL_PANIC");
+            } else if (streql(args[0], "debug_sprint")) {
+                sprint(farg);
+            } else if (streql(args[0], "debug_init_sprint")) {
+                serial_init();
             } else if (streql(args[0], "help")) {
                 help();
             } else {
                 printstr(" ERROR ", 0x04);
                 printstr(": ", 0x07);
                 printstr(args[0], 0x07);
-                printstr(" is neither a known command nor valid AEF binary! \n", 0x07);
+                printstr(" is not a valid command!", 0x07);
             }
         }
     }

@@ -18,7 +18,8 @@ bin:
 	mkdir bin
 
 kernel.elf: $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM)
-	$(LD) $(LDFLAGS) $^ -o $@
+	$(LD) $(LDFLAGS) -o $@ $^
+	strip $@
 
 $(KERNEL_OBJECTS_ASM): $(KERNEL_SOURCES_ASM)
 	$(AS) $(ASFLAGS) -o $@ $^

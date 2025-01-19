@@ -2,7 +2,7 @@
 
 #include <types.h>
 
-extern int terminal_main(uint16_t theme);
+extern int terminal_main();
 extern void kernelpanic(const char *errcode);
 
 extern void sprint(const char *str);
