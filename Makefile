@@ -7,10 +7,24 @@ CFLAGS = --target=i686-elf -Wall -Wextra -m32 -ffreestanding -Iinclude -nostdlib
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 --entry=main --strip-all -T link.ld
 
-KERNEL_SOURCES = kernel/kernel.c drivers/hardware/ports.c kernel/panic.c drivers/keyboard/input.c drivers/misc/memory.c drivers/vga/screen.c lib/msg.c lib/string.c lib/qemu.c core/tty/terminal.c core/tty/commands.c app/tinypad/tinypad.c drivers/hardware/cpu.c
-KERNEL_OBJECTS = bin/kernel.o bin/ports.o bin/panic.o bin/input.o bin/memory.o bin/screen.o bin/msg.o bin/string.o bin/qemu.o bin/terminal.o bin/commands.o bin/tinypad.o bin/cpu.o
+KERNEL_SOURCES = \
+	kernel/kernel.c \
+	drivers/hardware/ports.c \
+	kernel/panic.c \
+	drivers/keyboard/input.c \
+	drivers/misc/memory.c \
+	drivers/vga/screen.c \
+	lib/msg.c lib/string.c \
+	lib/qemu.c \
+	core/tty/terminal.c \
+	core/tty/commands.c \
+	app/tinypad/tinypad.c \
+	drivers/hardware/cpu.c\
+
 KERNEL_SOURCES_ASM = boot/boot.asm
-KERNEL_OBJECTS_ASM = bin/boot.o
+
+KERNEL_OBJECTS = $(foreach src,$(KERNEL_SOURCES),bin/$(notdir $(src:.c=.o)))
+KERNEL_OBJECTS_ASM = $(foreach src,$(KERNEL_SOURCES_ASM),bin/$(notdir $(src:.asm=.o)))
 
 all: bin $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM) kernel.elf
 
@@ -20,32 +34,18 @@ bin:
 kernel.elf: $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-$(KERNEL_OBJECTS_ASM): $(KERNEL_SOURCES_ASM)
-	$(AS) $(ASFLAGS) -o $@ $^
+bin/%.o: */%.c
+	$(CC) $(CFLAGS) $< -o $@
 
-bin/%.o: kernel/%.c
-	$(CC) $(CFLAGS) -o $@ $<
+bin/%.o: */*/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
-bin/%.o: drivers/keyboard/%.c
-	$(CC) $(CFLAGS) -o $@ $<
+bin/%.o: */*/*/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
-bin/%.o: drivers/misc/%.c
-	$(CC) $(CFLAGS) -o $@ $<
 
-bin/%.o: drivers/vga/%.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-bin/%.o: drivers/hardware/%.c
-	$(CC) $(CFLAGS) -o $@ $<
-	
-bin/%.o: lib/%.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-bin/%.o: core/tty/%.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-bin/%.o: apps/tinypad/%.c
-	$(CC) $(CFLAGS) -o $@ $<
+bin/%.o: */%.asm
+	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
 	rm -rf bin kernel.elf
