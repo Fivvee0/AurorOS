@@ -2,6 +2,13 @@
 #include <types.h>
 #include <memory.h>
 
+char *joinstr(const char *str1, const char *str2, char *dest) {
+    strcpy(dest, str1);
+    strcat(dest, str2);
+    return dest;
+}
+
+
 int strlen(const char *str) {
     int len = 0;
     while (str[len] != '\0') {

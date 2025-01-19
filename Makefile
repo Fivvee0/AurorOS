@@ -7,8 +7,8 @@ CFLAGS = --target=i686-elf -Wall -Wextra -m32 -ffreestanding -Iinclude -nostdlib
 ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T link.ld
 
-KERNEL_SOURCES = kernel/kernel.c drivers/hardware/ports.c kernel/panic.c drivers/keyboard/input.c drivers/misc/memory.c drivers/vga/screen.c lib/msg.c lib/string.c apps/terminal/terminal.c apps/terminal/commands.c app/tinypad/tinypad.c drivers/hardware/cpu.c
-KERNEL_OBJECTS = bin/kernel.o bin/ports.o bin/panic.o bin/input.o bin/memory.o bin/screen.o bin/msg.o bin/string.o bin/terminal.o bin/commands.o bin/tinypad.o bin/cpu.o
+KERNEL_SOURCES = kernel/kernel.c drivers/hardware/ports.c kernel/panic.c drivers/keyboard/input.c drivers/misc/memory.c drivers/vga/screen.c lib/msg.c lib/string.c lib/qemu.c apps/terminal/terminal.c apps/terminal/commands.c app/tinypad/tinypad.c drivers/hardware/cpu.c
+KERNEL_OBJECTS = bin/kernel.o bin/ports.o bin/panic.o bin/input.o bin/memory.o bin/screen.o bin/msg.o bin/string.o bin/qemu.o bin/terminal.o bin/commands.o bin/tinypad.o bin/cpu.o
 KERNEL_SOURCES_ASM = boot/boot.asm
 KERNEL_OBJECTS_ASM = bin/boot.o
 
@@ -51,4 +51,4 @@ clean:
 	rm -rf bin kernel.elf
 
 run:
-	qemu-system-x86_64 -kernel kernel.elf
+	qemu-system-x86_64 -kernel kernel.elf -serial stdio

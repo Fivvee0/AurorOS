@@ -1,7 +1,4 @@
-#include <types.h>
-
-extern int terminal_main(uint16_t theme);
-extern void kernelpanic(const char *errcode);
+#include "kernel.h"
 
 void main() {
     terminal_main(0x0B);

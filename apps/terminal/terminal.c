@@ -80,7 +80,7 @@ int terminal_main(uint16_t theme) {
                 reboot();
             } else if (streql(args[0], "shutdown")) {
                 shutdown();
-            } else if (streql(args[0], "changeuser")) {
+            } else if (streql(args[0], "chuser")) {
                 if (strlen(farg) < 1 || strlen(farg) > 8) {
                     print_error("User name must be between 1 and 8 characters long!");
                 } else {
