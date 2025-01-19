@@ -29,7 +29,3 @@ Run this command in FevOS repo to build the OS:
 Run this command to run the OS:
 
 `make run`
-
-or You can run AurorOS using this command:
-
-`qemu-system-x86_64 -kernel kernel.elf`
