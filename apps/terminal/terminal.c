@@ -26,12 +26,14 @@ int terminal_main() {
     print_info(NAME);
 
     char user[8];
+    char host[8];
+    strcpy(host, "fevos");
     strcpy(user, "root");
 
     char buffer[128];
     char *args[10];
     while (1) {
-        printprefix(user, PC_NAME);
+        printprefix(user, host);
         read_str(buffer, sizeof(buffer), 0, 0x07);
 
         int arg_count = split_str(buffer, ' ', args, 10);
@@ -66,6 +68,12 @@ int terminal_main() {
                 } else {
                     strcpy(user, farg);
                 }
+            } else if (streql(args[0], "chhost")) {
+                if (strlen(farg) < 1 || strlen(farg) > 8) {
+                    print_error("Host name must be between 1 and 8 characters long!");
+                } else {
+                    strcpy(host, farg);
+                }
             } else if (streql(args[0], "cpu")) {
                 println(get_cpu_name(), 0x07);
             } else if (streql(args[0], "tinypad")) {
@@ -73,9 +81,11 @@ int terminal_main() {
             } else if (streql(args[0], "debug_panic")) {
                 kernelpanic("DEBUG_KERNEL_PANIC");
             } else if (streql(args[0], "debug_sprint")) {
-                sprint(farg);
+                sprintln(farg);
             } else if (streql(args[0], "debug_init_sprint")) {
                 serial_init();
+            } else if (streql(args[0], "debug_exit")) {
+                return 1;
             } else if (streql(args[0], "help")) {
                 help();
             } else {
@@ -83,6 +93,7 @@ int terminal_main() {
                 printstr(": ", 0x07);
                 printstr(args[0], 0x07);
                 printstr(" is not a valid command!", 0x07);
+                printchar('\n', 0x07);
             }
         }
     }

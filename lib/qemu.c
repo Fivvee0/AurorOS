@@ -29,3 +29,8 @@ void sprint(const char *str) {
         sprintchar(*str++);
     }
 }
+
+void sprintln(const char *str) {
+    sprint(str);
+    sprintchar('\n');
+}

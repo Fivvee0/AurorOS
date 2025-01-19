@@ -72,5 +72,15 @@ void help() {
     println(" cowsay <arg1> - displays ascii art of an cow saying <arg1>", 0x07);
     println(" print <arg1> - prints out <arg1>", 0x07);
     println(" tinypad - very simple note pad ", 0x07);
+    println(" help - displays this help menu", 0x07);
+    println(" clear - clears the screen", 0x07);
+    println(" shutdown - shuts down the OS", 0x07);
+    println(" reboot - reboots the OS", 0x07);
+    println(" chuser <arg1> - changes the username", 0x07);
+    println(" chhost <arg1> - changes the hostname", 0x07);
+    println(" debug_panic - panic the OS", 0x07);
+    println(" debug_init_sprint - Inits qemu serial console driver", 0x07);
+    println(" debug_sprint <arg1> - prints out <arg1> to the serial console", 0x07);
+    println(" debug_exit_terminal - DANGERS TO THE USER - kernel panic", 0x07);
     println("", 0x07);
 }
