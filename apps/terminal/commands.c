@@ -81,6 +81,6 @@ void help() {
     println(" debug_panic - panic the OS", 0x07);
     println(" debug_init_sprint - Inits qemu serial console driver", 0x07);
     println(" debug_sprint <arg1> - prints out <arg1> to the serial console", 0x07);
-    println(" debug_exit_terminal - DANGERS TO THE USER - kernel panic", 0x07);
+    println(" debug_exit - DANGERS - exit the terminal", 0x07);
     println("", 0x07);
 }

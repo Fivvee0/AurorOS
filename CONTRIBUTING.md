@@ -18,11 +18,9 @@ Your pull request will be **rejected** if any of standards above is not used in 
 
 To clone, compile and run virtually AurorOS you will need `git`, `make`, `lld`, `clang`, `nasm` and `qemu-system-x86_64` installed.
 
-Clone the repository to the current folder skipping unnecessary commit history:
+Clone the repository.
 
-`git clone https://github.com/Interpuce/AurorOS . --depth 1`
-
-Run this command in AurorOS repo to build the OS:
+Run this command in FevOS repo to build the OS:
 
 `make`
 
