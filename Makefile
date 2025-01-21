@@ -19,7 +19,7 @@ KERNEL_SOURCES = \
 	core/tty/terminal.c \
 	core/tty/commands.c \
 	app/tinypad/tinypad.c \
-	drivers/hardware/cpu.c\
+	drivers/hardware/cpu.c \
 
 KERNEL_SOURCES_ASM = boot/boot.asm
 
@@ -33,6 +33,7 @@ bin:
 
 kernel.elf: $(KERNEL_OBJECTS) $(KERNEL_OBJECTS_ASM)
 	$(LD) $(LDFLAGS) -o $@ $^
+	llvm-objcopy --remove-section=.comment $@ $@
 
 bin/%.o: */%.c
 	$(CC) $(CFLAGS) $< -o $@

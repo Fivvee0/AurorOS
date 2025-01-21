@@ -7,9 +7,11 @@ section .multiboot
     dd -(0x1BADB002 + 0x00)
 
 section .text
+    global start
+    extern main
 
-global start
-extern main
+section .os
+    os db "FevOS", 0
 
 start:
     cli
