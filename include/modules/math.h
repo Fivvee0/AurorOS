@@ -1,0 +1,1 @@
+extern void increase(int *a, int b);

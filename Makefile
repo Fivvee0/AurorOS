@@ -20,6 +20,7 @@ KERNEL_SOURCES = \
 	core/tty/commands.c \
 	app/tinypad/tinypad.c \
 	drivers/hardware/cpu.c \
+	modules/math.c \
 
 KERNEL_SOURCES_ASM = boot/boot.asm
 
