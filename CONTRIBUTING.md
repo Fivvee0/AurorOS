@@ -16,7 +16,7 @@ Your pull request will be **rejected** if any of standards above is not used in 
 > [!CAUTION]
 > You will do this only at your own risk. We don't officially support any OS builds compiled by the user.
 
-To clone, compile and run virtually AurorOS you will need `git`, `make`, `lld`, `clang`, `nasm` and `qemu-system-x86_64` installed.
+To clone, compile and run virtually AurorOS you will need `git`, `make`, `lld`, `clang`, `nasm`, `llvm` and `qemu-system-x86_64` installed.
 
 Clone the repository.
 
