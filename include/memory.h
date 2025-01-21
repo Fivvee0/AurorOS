@@ -7,3 +7,4 @@ extern void *malloc(size_t size);
 extern void init_memory();
 extern void free(void *ptr);
 extern void *memset(void *s, int c, size_t n);
+extern int memcmp(const void *s1, const void *s2, size_t n);
