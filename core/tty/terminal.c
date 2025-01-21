@@ -82,8 +82,6 @@ int terminal_main() {
                 kernelpanic("DEBUG_KERNEL_PANIC");
             } else if (streql(args[0], "debug_sprint")) {
                 sprintln(farg);
-            } else if (streql(args[0], "debug_init_sprint")) {
-                serial_init();
             } else if (streql(args[0], "debug_exit")) {
                 return 1;
             } else if (streql(args[0], "help")) {
